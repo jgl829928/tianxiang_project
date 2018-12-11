@@ -1,0 +1,41 @@
+.container {
+    .header {
+      background-color: rgb(84, 92, 100);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      & > span {
+        padding: 0 20px;
+        display: block;
+        text-align: center;
+        font-size: 20px;
+        color: #fff;
+        line-height: 60px;
+      }
+      .menu {
+        /deep/.el-menu-demo {
+          border-bottom: none;
+        }
+      }
+      .logout {
+        margin-right: 20px;
+        display: flex;
+  
+        span {
+          font-size: 16px;
+          line-height: 60px;
+          color: #fff;
+          margin-right: 20px;
+        }
+  
+        button {
+          height: 30px;
+          margin: 15px 0;
+          padding: 0 20px;
+        }
+      }
+    }
+    .content {
+      min-height: 300px;
+    }
+  }

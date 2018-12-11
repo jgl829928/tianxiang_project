@@ -1,0 +1,71 @@
+.login {
+    -ms-flex-align: center;
+    -ms-flex-pack: distribute;
+    -webkit-box-align: center;
+    align-items: center;
+    background: rgba(0, 0, 0, 0.2);
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    justify-content: space-around;
+    position: relative;
+    height: 100%;
+    overflow: hidden;
+    min-height: 768px;
+    &::before {
+      background-image: url(../../assets/images/login_back.jpg);
+      background-size: cover;
+      background-color:#fff;
+      filter:Alpha(Opacity=60);
+      opacity:0.6;
+      content: "";
+      height: 100%;
+      left: 0;
+      position: absolute;
+      top: 0;
+      width: 100%;
+      z-index: -999;
+    }
+    .container {
+      position: relative;
+      top:140px;
+      filter:Alpha(Opacity=60);
+      opacity:0.8;
+      background: #B4B4B5;
+      box-shadow: 0 0 9px 0 rgba(166,95,70,.29);
+      border-radius: 6px;
+  
+      padding: 30px 30px 30px 30px;
+      
+      h1 {
+        font-size: 30px;
+      }
+      h3 {
+        font-size: 20px;
+        margin: 10px 0;
+      }
+      .el-form {
+        .el-form-item {
+          /deep/ .el-form-item__label {
+            width: 70px !important;
+            text-align: center;
+          }
+          /deep/ .el-form-item__content {
+            margin-left: 70px !important;
+          }
+        }
+        .el-form-item:nth-of-type(3) {
+          margin-bottom: 0;
+          padding-top: 10px;
+          /deep/ .el-form-item__content {
+            margin-left: 22px !important;
+          }
+        }
+      }
+    }
+    footer {
+      position: absolute;
+      bottom: 20px;
+      font-size: 16px;
+    }
+  }
