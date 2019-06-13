@@ -1,0 +1,96 @@
+.activity_edit {
+    text-align: left;
+    width: 90%;
+    margin: 40px auto 0;
+
+    // 共用参数
+    .common_args {
+      width: 90%;
+      margin: 10px auto;
+      font-size: 16px;
+      overflow: hidden;
+      label {
+        display: inline-block;
+        width: 100px;
+        color: #99a9bf;
+      }
+
+      span {
+        color: #606266;
+        vertical-align: top;
+      }
+
+      .serverCheck{
+          width:calc(~"100% - 170px");
+          display: inline-block;
+          min-height:80px;
+          overflow:scroll;
+          max-height: 150px;
+          border:1px solid #dadada;
+          border-radius: 6px;
+          padding:10px 20px;
+          .el-scrollbar__wrap {
+              overflow-x: hidden;
+          }
+      }
+      .commentInput{
+        width:calc(~"100% - 130px");
+        display: inline-block;
+      }
+
+    }
+
+    .box-card {
+      width: 90%;
+      margin: auto;
+      // 每项活动
+      .activity_item {
+        .info_title {
+          padding-left: 20px;
+          height: 45px;
+          line-height: 45px;
+          background: #f2f2f2;
+          font-size: 16px;
+          border-bottom: 1px solid #d7d7d7;
+        }
+
+        .info_content {
+          padding:10px 0;
+          width: 90%;
+          margin: auto;
+          font-size: 16px;
+          .el-col{
+            div{
+                height: 45px;
+                line-height: 45px;
+              }
+            }
+          label {
+            display: inline-block;
+            width: 130px;
+            color: #99a9bf;
+            overflow: hidden;
+          }
+
+          span {
+            display: inline-block;
+            width: calc(~"100% - 140px");
+            line-height:45px;
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            color: #606266;
+          }
+          
+          .clientItem{
+            label {
+                width: 250px;
+            }
+            span{
+                width: calc(~"100% - 260px");
+            }
+          }
+        }
+      }
+    }
+  }

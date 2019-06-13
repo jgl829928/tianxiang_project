@@ -1,9 +1,11 @@
 <template>
   <div class="container">
     <div class="header" id="header">
-      <span>{{user.title}}</span>
+      <div class="projectTitle">
+        <span>{{user.title}}</span>
+      </div>
       <div class="menu">
-        <el-menu :default-openeds="menuList" class="el-menu-demo" :default-active="$route.path" mode="horizontal"
+        <el-menu :default-openeds="menuList" class="el-menu-demo" :default-active="$route.path"  mode="horizontal"
           background-color="#545c64" text-color="#fff" active-text-color="#ffd04b" router>
           <span v-for="(one, index) in menuList" :key="index" v-if="one.name!=404">
             <el-menu-item :index="one.path" :key="index" v-if="!one.children||one.children.length==0">
@@ -48,7 +50,7 @@
         }
       };
     },
-    created() {
+    mounted() {
       this.user = this.$store.state.user;
     },
     methods: {
@@ -61,12 +63,12 @@
         })
           .then(() => {
             this.$http.get(api.logout).then(res => {
-              sessionStorage.clear();
+              that.$store.commit("DEL_TOKEN");
               that.$router.push("/");
             });
           })
           .catch(() => { });
-      }
+      },
     }
   };
 </script>

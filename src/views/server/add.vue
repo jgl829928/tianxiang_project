@@ -67,6 +67,7 @@
 </template>
 <script>
 import api from "@/utils/api";
+import { _debounce } from "@/utils/auth";
 export default {
   name: "ServerAdd",
   data() {
@@ -151,7 +152,7 @@ export default {
       }
     };
   },
-  created() {
+  mounted() {
     this.getData();
   },
   methods: {
@@ -164,7 +165,7 @@ export default {
       }
     },
     // 提交表单
-    submitForm(formName) {
+    submitForm:_debounce(function(formName) {
       this.$refs[formName].validate(async valid => {
         if (valid) {
           let res = await this.$http.post(api.serverAdd, this.reqData);
@@ -181,7 +182,7 @@ export default {
           return false;
         }
       });
-    },
+    },500),
     // 重置表单
     resetForm(formName) {
       this.$refs[formName].resetFields();

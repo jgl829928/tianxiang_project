@@ -20,6 +20,7 @@
 
 <script>
 import api from "../../utils/api";
+import {  _debounce } from "@/utils/auth";
 export default {
   name:"AdminEdit",
   data() {
@@ -31,7 +32,7 @@ export default {
       tableData: [] //表格数据
     };
   },
-  created() {
+  mounted() {
     this.usr = {
       ID: this.$route.query.ID,
       Name: this.$route.query.Name
@@ -39,6 +40,7 @@ export default {
     this.getdata();
   },
   methods: {
+    
     // 初始化数据
     async getdata() {
       let res = await this.$http.get(api.getAccess, {
@@ -48,13 +50,14 @@ export default {
         this.tableData = res.Data.auth || [];
       }
     },
+
     // 多选框改变
     handlechange(row) {
       row.Authorized = !row.Authorized;
     },
 
     // 提交表单
-    async submitForm() {
+    submitForm: _debounce(async function (){
       let res = await this.$http.post(
         `${api.editAccess}?usr=${this.usr.Name}`,
         this.tableData
@@ -66,7 +69,7 @@ export default {
         });
         this.$router.push("/admin");
       }
-    }
+    },500)
   }
 };
 </script>

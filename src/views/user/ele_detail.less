@@ -1,12 +1,21 @@
 .frame {
     .first_table {
       .el-date-editor.el-input {
-        width: 70%;
+        width: 65%;
       }
-      .mute_btn {
-        padding: 10px 5%;
-        text-align: center;
-        /* width:20% !important; */
+    }
+    .mute_btn {
+      padding: 10px 3%;
+      vertical-align: middle;
+      text-align: center;
+    }
+    .special_layout{
+      .el-select{
+        width:65%;
+      }
+      &>span{
+        display: inline-block;
+        width:65%;
       }
     }
     .add_form {
@@ -24,6 +33,9 @@
           }
         }
       }
+      .el-form--inline .el-form-item__content{
+        width:50%;
+      }
       .error_message {
         color: red;
         margin-bottom: 20px;
@@ -33,9 +45,17 @@
 .common_dialog {
   .el-dialog {
     width: 650px;
+    .email_content{
+      width:100%;
+      .el-form-item__content{
+        width:calc(~"100% - 100px");
+      }
+      
+    }
   }
   table thead .el-checkbox__input {
     display: none !important;
   }
+
 }
    

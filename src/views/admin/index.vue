@@ -37,7 +37,7 @@
                 edit:false, //是否有编辑权限
             }
         },
-        created() {
+        mounted() {
             this.getData();
         },
         methods: {

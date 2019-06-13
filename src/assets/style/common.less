@@ -6,10 +6,11 @@
 }
 // 表格
 .content_table{
-    margin:20px;
+    margin:20px 0;
 }
 // 单选框
 .common_radio{
+    margin-bottom:20px;
     margin-left: 20px;
     &>span {
       font-size: 20px;
@@ -35,10 +36,7 @@
     }
     }
   }
-//  删除按钮
-.delete_btn {
-    padding: 10px 20px !important;
-  }
+
 //有title的box
 .frame {
     width: 90%;
@@ -48,17 +46,16 @@
     border-radius: 4px;
     overflow: hidden;
     .frameTop {
-        width: 100%;
+        padding-left:20px;
         height: 45px;
         line-height: 45px;
         background: #f2f2f2;
         border-bottom: 1px solid #d7d7d7;
-        position: relative;
     }
     .frameDiv {
-        width: 100%;
+        // width: 100%;
         display: flex;
-        .tables {
+        .tables{
             width: 35%;
             margin: 10px;
             tr {
@@ -98,3 +95,94 @@
       }
     }
   }
+
+// 下拉搜索
+.select_server {
+    margin: 30px 0 0px 50px;
+    .left_name {
+        display: inline-block;
+        width: 50px;
+        height: 38px;
+        line-height: 38px;
+        text-align: center;
+        border: 1px solid #dcdfe6;
+        border-radius: 0px;
+        border-right: none;
+        border-top-left-radius: 4px;
+        border-bottom-left-radius: 4px;
+        background: #f4f4f5;
+        position: relative;
+        left: 4px;
+        top: 1px;
+    }
+
+    .right_btn {
+        height: 40px;
+        border-radius: 0px;
+        border-left: none;
+        position: relative;
+        left: -4px;
+        border-top-right-radius: 4px;
+        border-bottom-right-radius: 4px;
+    }
+    .el_select {
+        margin: 0px;
+      }
+      .el-input__inner {
+        border-radius: 0px;
+      }
+}
+
+// 图表
+.lineCharts {
+    .el-col{
+      padding:0 40px;
+      height: 300px;
+    }
+}
+
+// 图表表单
+.chart_form{
+    text-align: left;
+    .el-row .el-col:nth-child(1){
+        padding-left:40px;
+    }
+    .el-row .el-col:nth-last-child(1){
+        text-align: center;
+    }
+}
+
+// 搜索表单操作按钮
+.operate_btn{
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+//下载按钮
+.download_btn {
+    margin-bottom: 10px;
+}
+//  删除按钮
+.delete_btn {
+    padding: 10px 20px !important;
+}
+.common_btn{
+    width:88px;
+    height:34px;
+}
+
+// 多选框
+.checkbox {
+    text-align: left;
+    /* width: calc(~"100% - 40px"); */
+    min-height:80px;
+    overflow:scroll;
+    max-height: 150px;
+    border: 1px solid #dadada;
+    border-radius: 6px;
+    padding: 10px 20px;
+    .el-scrollbar__wrap {
+        overflow-x: hidden;
+    }
+}
+

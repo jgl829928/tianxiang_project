@@ -5,22 +5,33 @@ import { Message } from 'element-ui'
 import { URL } from './api.js'
 export const http = axios.create({
   baseURL: URL,
-  timeout: 1000 * 10,
+  timeout: 1000 * 60,
 });
 
 
-// 请求拦截器
+var timeout;
+function refreshTime() {
+  if (timeout) {
+    clearTimeout(timeout);
+  }
+  timeout = setTimeout(() => {
+    routes.replace({ path: '/' })
+    store.commit('DEL_TOKEN')
+    Message.error('登录超时,请重新登录');
+  }, 30 * 60 * 1000)
+}
+
+
+// 请求拦截器,在请求发出之前进行一些操作
 http.interceptors.request.use(function (config) {
   let token = store.state.token
   if (config.url.split("?")[0] !== "/") {
+    refreshTime();
     config.headers["accesstoken"] = token;
     if (config.headers['accesstoken'] == null) {
-      routes.replace({
-        path: '/' // 到登录页重新获取token
-      })
+      routes.replace({path: '/' }) // 到登录页重新获取token
     }
   }
-  //在请求发出之前进行一些操作
   return config
 }, function (error) {
   Message.error('请求失败,请重试');
@@ -36,7 +47,26 @@ function dealCode(code) {
     "-2": "登录超时，请重新登录",
     "-3": "参数错误",
     "-4": "操作失败，请重新登录",
+    "-5": "无效的提交方式",
+    "-6": "系统内部错误",
+    "-7": "文件名不匹配",
+    "-8": "文件大小超出限制",
+    "-101": "登录失败",
+    "-102": "无效的用户名",
+    "-103": "无效的密码",
     "-201": "抱歉！您没有此操作权限",
+    "-202": "数据保存失败",
+
+    "-401": "数据已被其他人修改",
+    "-501": "没有这只采样文件系统",
+    "-502": "执行采样失败",
+    "-503": "删除采样文件失败",
+    "-504": "配置文件转换失败",
+    "-505": "配置文件不匹配",
+    "-601": "修改导量人数失败",
+    "-602": "开启导量状态失败",
+    "-701": "ID不匹配",
+
     "400": "错误请求",
     "404": "当前资源不存在",
     "500": "服务器忙，请重试",

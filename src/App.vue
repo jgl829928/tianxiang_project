@@ -12,8 +12,8 @@ export default {
 
 <style>
 body {
-  height: 100%;
-  overflow: auto;
+  height:inherit;
+  overflow:auto;
 }
 #app {
   font-family: "Avenir", Helvetica, Arial, sans-serif;
@@ -23,6 +23,7 @@ body {
   color: #2c3e50;
   width: 100%;
   height: 100%;
-  min-width: 1280px;
+  overflow:auto;
+  -webkit-overflow-scrolling: touch;
 }
 </style>

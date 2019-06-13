@@ -1,5 +1,5 @@
 <template>
-    <div class="common_content addContent">
+    <div class="common_content sys_add">
         <div class="addHeader">Create Notice Profile</div>
         <hr>
         <div class="add_box">
@@ -10,8 +10,7 @@
                         <el-form-item label="Lan" :prop="'notices.' + index + '.lan'" :rules="[{ required: true, message: '请选择语言', trigger: 'blur' }]">
                             <el-select v-model="item.lan" filterable remote reserve-keyword placeholder="请输入关键词"
                                 :remote-method="remoteMethod" :key="index">
-                                <el-option v-for="items in langList" :key="items.value" :label="items.label" :value="items.value">
-                                </el-option>
+                                <el-option v-for="items in langList" :key="items.value" :label="items.label" :value="items.value"></el-option>
                             </el-select>
                         </el-form-item>
                     </el-col>
@@ -19,11 +18,9 @@
                         <el-form-item label="Content" :prop="'notices.' + index + '.content'" :rules="[{ required: true, message: '请输入内容', trigger: 'blur' }]">
                             <div class="ql-container ql-snow editor_input">
                                 <div class="ql-editor">
-                                    <quill-editor ref="myTextEditor" v-model="item.content" :options="editorOption">
-                                    </quill-editor>
+                                    <quill-editor ref="myTextEditor" v-model="item.content" :options="editorOption"></quill-editor>
                                 </div>
                             </div>
-
                         </el-form-item>
                     </el-col>
                     <el-col :span="4" class="edit_options">
@@ -47,7 +44,8 @@
 
 <script>
     import api from "@/utils/api";
-    import { quillEditor } from 'vue-quill-editor'
+    import { quillEditor } from "vue-quill-editor";
+    import { allCountry ,_debounce} from "@/utils/auth";
     export default {
         name: "SysAdd",
         components: { quillEditor },
@@ -55,37 +53,44 @@
             return {
                 reqForm: {
                     notices: [{ lan: "", content: "" }],
-                    sidlist: [],
+                    sidlist: []
                 },
                 editorOption: {
                     modules: {
                         toolbar: [
-                            ['bold', 'italic'],        // toggled 
-                            [{ 'color': [] }],
+                            ["bold", "italic"], // toggled
+                            [{ color: [] }]
                         ]
                     }
                 },
                 // lan搜索下拉框
                 langList: [],
                 list: [],
-                allLang: ["ad", "ae", "af", "ag", "ai", "al", "am", "ao", "ar", "as", "at", "au", "aw", "az", "ba", "bb", "bd", "be", "bf", "bg", "bh", "bi", "bj", "bl", "bm", "bn", "bo", "bq", "br", "bs", "bt", "bw", "by", "bz", "ca", "cd", "cf", "cg", "ch", "ci", "ck", "cl", "cm", "cn", "co", "cr", "cu", "cv", "cw", "cy", "cz", "de", "dj", "dk", "dm", "do", "dz", "ec", "ee", "eg", "er", "es", "et", "eu", "en", "fi", "fj", "fm", "fo", "fr", "ga", "gd", "ge", "gf", "gg", "gh", "gi", "gl", "gm", "gn", "gp", "gq", "gr", "gt", "gu", "gw", "gy", "hk", "hn", "hr", "ht", "hu", "id", "ie", "il", "im", "in", "io", "iq", "ir", "is", "it", "je", "jm", "jo", "jp", "ke", "kg", "kh", "ki", "km", "kn", "kp", "kr", "kw", "ky", "kz", "la", "lb", "lc", "li", "lk", "lr", "ls", "lt", "lu", "lv", "ly", "ma", "mc", "md", "me", "mf", "mg", "mh", "mk", "ml", "mm", "mn", "mo", "mp", "mq", "mr", "ms", "mt", "mu", "mv", "mw", "mx", "my", "mz", "na", "nc", "ne", "nf", "ng", "ni", "nl", "no", "np", "nr", "nu", "nz", "om", "pa", "pe", "pf", "pg", "ph", "pk", "pl", "pm", "pr", "ps", "pt", "pw", "py", "qa", "re", "ro", "rs", "ru", "rw", "sa", "sb", "sc", "sd", "se", "sg", "si", "sk", "sl", "sm", "sn", "so", "sr", "ss", "st", "sv", "sx", "sy", "sz", "tc", "td", "tg", "th", "tj", "tk", "tl", "tm", "tn", "to", "tr", "tt", "tv", "tw", "tz", "ua", "ug", "uk", "us", "uy", "uz", "va", "vc", "ve", "vg", "vi", "vn", "vu", "wf", "ws", "ye", "yt", "za", "zm", "zw"],
+                allLang: [],
                 // 服务选择框
                 serverList: [],
                 // 错误信息提示
                 error_msg: "",
                 // 验证规则
                 rules: {
-                    sidlist: [{
-                        required: true, message: '请选择服务器id', trigger: 'blur'
-                    }]
-                },
-
+                    sidlist: [
+                        {
+                            required: true,
+                            message: "请选择服务器id",
+                            trigger: "blur"
+                        }
+                    ]
+                }
             };
         },
-        created() {
+        mounted() {
             this.getData();
-            this.list = this.allLang.map(item => {
-                return { value: item, label: item };
+            //获取所有国家
+            allCountry().then(value => {
+                this.allLang = value;
+                this.list = this.allLang.map(item => {
+                    return { value: item, label: item };
+                });
             });
         },
         methods: {
@@ -98,7 +103,7 @@
             },
             // 下拉框自动搜索
             remoteMethod(query) {
-                if (query !== '') {
+                if (query !== "") {
                     this.langList = this.list.filter(item => {
                         return item.label.toLowerCase().indexOf(query.toLowerCase()) > -1;
                     });
@@ -107,22 +112,23 @@
                 }
             },
             // 提交表单
-            submitForm(formName) {
+            submitForm:_debounce(function(formName) {
                 this.$refs[formName].validate(async valid => {
                     if (!valid) {
                         return false;
                     }
                     // 判断语言是否重复
-                    let langlist = [], isRepeat = false;
+                    let langlist = [],
+                        isRepeat = false;
                     this.reqForm.notices.map(item => {
                         if (langlist.includes(item.lan)) {
                             isRepeat = true;
-                            this.error_msg = '语言重复！！！请检查数据后重试'
+                            this.error_msg = "语言重复！！！请检查数据后重试";
                             return;
                         } else {
-                            langlist.push(item.lan)
+                            langlist.push(item.lan);
                         }
-                    })
+                    });
                     langlist = [];
                     if (!isRepeat) {
                         this.$http.post(api.sysSubmit, this.reqForm).then(res => {
@@ -131,12 +137,12 @@
                                     message: "添加成功",
                                     type: "success"
                                 });
-                                this.$router.push("/sysnotice")
+                                this.$router.push("/sysnotice");
                             }
-                        })
+                        });
                     }
                 });
-            },
+            },500),
             // 添加一行数据
             add(index) {
                 let noticeItem = {
@@ -158,7 +164,8 @@
     @import url("./add.less");
 </style>
 <style lang="less">
-    @import url('quill/dist/quill.snow.css');
+    @import url("quill/dist/quill.snow.css");
+
     .sys_add {
         .el-form-item {
             width: 100%;
@@ -188,7 +195,7 @@
             .ql-toolbar.ql-snow+.ql-container.ql-snow {
                 border: none !important;
                 height: 200px;
-                padding: 0 10px
+                padding: 0 10px;
             }
 
             .ql-toolbar.ql-snow {

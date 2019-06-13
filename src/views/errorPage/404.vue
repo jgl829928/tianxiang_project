@@ -1,90 +1,74 @@
 <template>
-    <div class="error404">
-        <div class="error404-body-con">
-            <div>
-                <div class="error404-body-con-title">404</div>
-                <p class="error404-body-con-message">页面不存在</p>
-                <div class="error404-btn-con">
-                    <Button @click="goHome" size="large" style="width: 200px;" type="text">返回登录</Button>
-                    <Button @click="backPage" size="large" style="width: 200px;margin-left: 40px;" type="primary">返回上一页</Button>
-                </div>
-            </div>
+    <div class="page-container">
+        <img src="../../assets/images/404.png" alt="">
+        <p class="alert_info_1">噢···看来你是迷路了！</p>
+        <p class="alert_info_2">通过点击选项寻找回家的路</p>
+        <div>
+            <el-button @click="return_index">返回首页</el-button>
+            <el-button @click="return_last" type="plain">上一页</el-button>
         </div>
     </div>
 </template>
-
 <script>
 export default {
-    name: 'Error404',
-    methods: {
-        backPage () {
-            this.$router.go(-1);
+    methods:{
+        return_index(){
+            this.$router.push("/")
         },
-        goHome () {
-            this.$router.push({
-                name: 'login'
-            });
+        return_last(){
+            this.$router.go(-1)
         }
-    }
-};
-</script>
-<style lang="less" scoped>
-    @keyframes error404animation {
-    0% {
-        transform: rotateZ(0deg);
-    }
-    20% {
-        transform: rotateZ(-60deg);
-    }
-    40% {
-        transform: rotateZ(-10deg);
-    }
-    60% {
-        transform: rotateZ(50deg);
-    }
-    80% {
-        transform: rotateZ(-20deg);
-    }
-    100% {
-        transform: rotateZ(0deg);
     }
 }
-.error404{
-    &-body-con{
-        width: 700px;
-        height: 500px;
-        position: absolute;
-        left: 50%;
-        top: 50%;
-        transform: translate(-50%,-50%);
-        &-title{
-            text-align: center;
-            font-size: 240px;
-            font-weight: 700;
-            color: #2d8cf0;
-            height: 260px;
-            line-height: 260px;
-            margin-top: 40px;
-            span{
-                display: inline-block;
-                color: #19be6b;
-                font-size: 230px;
-                animation: error404animation 3s ease 0s infinite alternate;
-            }
-        }
-        &-message{
-            display: block;
-            text-align: center;
-            font-size: 30px;
-            font-weight: 500;
-            letter-spacing: 12px;
-            color: #dddde2;
-        }
-    }
-    &-btn-con{
-        text-align: center;
-        padding: 20px 0;
-        margin-bottom: 40px;
-    }
+</script>
+
+<style lang="less" scoped>
+.page-container {
+  text-align: center;
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 80%;
+  margin: auto;
+  .alert_info_1 {
+    font-size: 32px;
+    color: #6e6d72;
+    letter-spacing: 1.92px;
+  }
+  .alert_info_2 {
+      margin-top:20px;
+    font-size: 17.99px;
+    color: #a8a9ad;
+    letter-spacing: 1.08px;
+    margin-bottom:30px;
+  }
+
+  img {
+    display: inline-block;
+    width: 80%;
+    // margin-left: 5%;
+    margin-top: 30px;
+  }
+  button{
+      width:240px;
+      height:44px;
+      margin-right:50px;
+      
+  }
+  button:nth-child(1){
+      background:#FFAD18;
+      color:#fff;
+  }
+  button:nth-child(2){
+      border:1px solid #FFAD18;
+      background:none;
+      color:#FFAD18;
+  }
+   button:nth-child(2):hover{
+       background:none;
+   }
 }
 </style>
+

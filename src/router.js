@@ -30,19 +30,6 @@ const user = {
     detail: () => import(`${user_url}detail`),
 }
 
-
-// ----------warning-----------
-const warning_url = "./views/warning/"
-const warning = {
-    warning: () => import(`${warning_url}index`),
-}
-
-// --------common----------
-const common_url = "./views/common/"
-const common = {
-    common: () => import(`${common_url}index`),
-}
-
 // ----------sysnotice---------
 const sysnotice_url = "./views/sysnotice/"
 const sysnotice = {
@@ -50,10 +37,51 @@ const sysnotice = {
     create: () => import(`${sysnotice_url}add`),
 }
 
-const sampling_url = "./views/sampling/"
-const sampling = {
-    sampling: () => import(`${sampling_url}index`),
+// ----------config---------------
+const config_url = "./views/config/"
+const config = {
+    config: () => import(`${config_url}index`),
+    add: () => import(`${config_url}add`),
+    edit: () => import(`${config_url}edit`),
 }
+
+// -----------activity---------
+const activity_url = "./views/activity/"
+const activity = {
+    activity: () => import(`${activity_url}index`),
+    add: () => import(`${activity_url}add`),
+    edit:()=> import(`${activity_url}edit`),
+}
+
+const version_url = "./views/version/"
+const version = {
+    version: () => import(`${version_url}index`),
+    modify: () => import(`${version_url}modify`),
+}
+
+// ----------warning-----------
+const warning = () => import("./views/warning/index")
+
+// --------common----------
+const common = () => import('./views/common/index')
+
+// ----------sampling-----------
+const sampling = () => import("./views/sampling/index")
+
+// ---------worldmap-------------
+const worldmap = () => import("./views/worldmap/index")
+
+// ----------monitor------------
+const monitor = () => import("./views/monitor/index")
+
+// ----------chat------------
+const chat = () => import("./views/chat/index")
+
+// ----------statistics------------
+const statistics = () => import("./views/statistics/index")
+
+// ----------income------------
+const income = () => import("./views/income/index")
 
 Vue.use(Router)
 
@@ -69,7 +97,7 @@ const router = new Router({
             path: '/admin',
             component: Home,
             name: 'mainAdmin',
-            redirect:"/",
+            redirect: "/",
             children: [
                 { path: '/', component: admin.admin, name: 'admin', meta: { name: "admin" }, },
                 { path: 'edit', component: admin.edit, name: 'adminEdit', meta: { name: "edit" } },
@@ -81,7 +109,7 @@ const router = new Router({
             path: '/server',
             component: Home,
             name: 'mainServer',
-            redirect:"/",
+            redirect: "/",
             children: [
                 { path: '/', component: server.server, name: 'server', meta: { name: "server" }, },
                 { path: 'edit', component: server.edit, name: 'serverEdit', meta: { name: "edit" } },
@@ -92,7 +120,7 @@ const router = new Router({
             path: '/user',
             component: Home,
             name: 'mainUser',
-            redirect:"/",
+            redirect: "/",
             children: [
                 { path: '/', component: user.user, name: 'user', meta: { name: "user" }, },
                 { path: 'detail', component: user.detail, name: 'userdetail', meta: { name: "detail" }, }
@@ -102,37 +130,114 @@ const router = new Router({
             path: '/warning',
             component: Home,
             name: 'mainWarning',
-            redirect:"/",
+            redirect: "/",
             children: [
-                { path: '/', component: warning.warning, name: 'warning', meta: { name: "warning" }, },
+                { path: '/', component: warning, name: 'warning', meta: { name: "warning" }, },
             ]
         },
         {
             path: '/common',
             component: Home,
             name: 'mainCommon',
-            redirect:"/",
+            redirect: "/",
             children: [
-                { path: '/', component: common.common, name: 'common', meta: { name: "common" }, },
+                { path: '/', component: common, name: 'common', meta: { name: "common" }, },
             ]
         },
         {
             path: '/sysnotice',
             component: Home,
             name: 'mainSysnotice',
-            redirect:"/",
+            redirect: "/",
             children: [
                 { path: '/', component: sysnotice.sysnotice, name: 'sysnotice', meta: { name: "sysnotice" }, },
                 { path: 'create', component: sysnotice.create, name: 'syscreate', meta: { name: "syscreate" }, },
             ]
         },
         {
+            path: '/config',
+            component: Home,
+            name: 'mainConfig',
+            redirect: "/",
+            children: [
+                { path: '/', component: config.config, name: 'config', meta: { name: "config" }, },
+                { path: 'add', component: config.add, name: 'configAdd', meta: { name: "configAdd" }, },
+                { path: 'edit', component: config.edit, name: 'configEdit', meta: { name: "configEdit" }, },
+            ]
+        },
+        {
+            path: '/activities',
+            component: Home,
+            name: 'mainActivity',
+            redirect: "/",
+            children: [
+                { path: '/', component: activity.activity, name: 'activity', meta: { name: "activity" }, },
+                { path: 'add', component: activity.add, name: 'activityAdd', meta: { name: "activityAdd" }, },
+                { path: 'edit', component: activity.edit, name: 'activityEdit', meta: { name: "activityEdit" }, },
+            ]
+        },
+        {
+            path: '/version',
+            component: Home,
+            name: 'mainVersion',
+            redirect: "/",
+            children: [
+                { path: '/', component: version.version, name: 'version', meta: { name: "version" }, },
+                { path: 'modify', component: version.modify, name: 'versionModify', meta: { name: "versionModify" }, },
+            ]
+        },
+        {
             path: '/sampling',
             component: Home,
             name: 'mainSampling',
-            redirect:"/",
+            redirect: "/",
             children: [
-                { path: '/', component: sampling.sampling, name: 'sampling', meta: { name: "sampling" }, },
+                { path: '/', component: sampling, name: 'sampling', meta: { name: "sampling" }, },
+            ]
+        },
+        {
+            path: '/worldmap',
+            component: Home,
+            name: 'mainMap',
+            redirect: "/",
+            children: [
+                { path: '/', component: worldmap, name: 'worldmap', meta: { name: "worldmap" }, },
+            ]
+        },
+        {
+            path: '/monitor',
+            component: Home,
+            name: 'mainMonitor',
+            redirect: "/",
+            children: [
+                { path: '/', component: monitor, name: 'monitor', meta: { name: "monitor" }, },
+            ]
+        },
+        {
+            path: '/chat',
+            component: Home,
+            name: 'mainChat',
+            redirect: "/",
+            children: [
+                { path: '/', component: chat, name: 'chat', meta: { name: "chat" }, },
+            ]
+        },
+        {
+            path: '/statistics',
+            component: Home,
+            name: 'mainStatistics',
+            redirect: "/",
+            children: [
+                { path: '/', component: statistics, name: 'statistics', meta: { name: "statistics" }, },
+            ]
+        },
+        {
+            path: '/income',
+            component: Home,
+            name: 'mainIncome',
+            redirect: "/",
+            children: [
+                { path: '/', component: income, name: 'income', meta: { name: "income" }, },
             ]
         },
         {

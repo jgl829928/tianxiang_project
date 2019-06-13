@@ -10,7 +10,7 @@ function menuList(data, path) {
             item.path = "/" + item.path
         }
         if (item.children && item.children.length > 0) {
-            let name=item.meta.name.replace("/","")
+            let name = item.meta.name.replace("/", "")
             menuList(item.children, item.path);
         }
     }
@@ -19,15 +19,15 @@ function menuList(data, path) {
 
 export const initRouterNode = (data) => {
     let menulist = menuList(data, "")
-    menulist.map((item)=>{
-        if(item.children&&item.children.length>0){
+    menulist.map((item) => {
+        if (item.children && item.children.length > 0) {
             item.children.unshift({
-                path:item.path,
-                meta:{
-                    name:item.meta.name
+                path: item.path,
+                meta: {
+                    name: item.meta.name
                 }
             })
-        }  
+        }
     })
     store.commit('SET_ROUTERS', menulist);
 }

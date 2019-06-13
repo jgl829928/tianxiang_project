@@ -1,16 +1,17 @@
 .container {
+    min-width:1280px;
+    -webkit-overflow-scrolling : touch;
     .header {
       background-color: rgb(84, 92, 100);
       display: flex;
       justify-content: space-between;
       align-items: center;
-      & > span {
-        padding: 0 20px;
-        display: block;
-        text-align: center;
+      & > .projectTitle {
+        min-width:180px;
+        margin-left:20px;
         font-size: 20px;
         color: #fff;
-        line-height: 60px;
+        line-height: 40px;
       }
       .menu {
         /deep/.el-menu-demo {
@@ -18,18 +19,17 @@
         }
       }
       .logout {
+        min-width:240px;
         margin-right: 20px;
-        display: flex;
   
         span {
           font-size: 16px;
-          line-height: 60px;
           color: #fff;
           margin-right: 20px;
         }
   
         button {
-          height: 30px;
+          height: 27px;
           margin: 15px 0;
           padding: 0 20px;
         }
@@ -37,5 +37,6 @@
     }
     .content {
       min-height: 300px;
+      
     }
   }

@@ -32,7 +32,7 @@
 
 <script>
 import api from "@/utils/api";
-import { encrypt } from "@/utils/auth";
+import { encrypt, _debounce } from "@/utils/auth";
 export default {
   name: "AdminAdd",
   data() {
@@ -81,7 +81,7 @@ export default {
       }
     };
   },
-  created() {
+  mounted() {
     this.getData();
   },
   methods: {
@@ -92,7 +92,7 @@ export default {
       }
     },
     // 提交表单
-    submitForm(formName) {
+    submitForm: _debounce(function (formName){
       this.$refs[formName].validate(async valid => {
         if (!valid) {
           return false;
@@ -110,7 +110,7 @@ export default {
         });
         this.$router.push("/admin");
       });
-    },
+    },500),
     resetForm(formName) {
       this.$refs[formName].resetFields();
     }
